@@ -26,9 +26,8 @@
                 <th scope="col"> Registered Address </th>
                 <th scope="col"> OfficeNo. </th>
                 <th scope="col"> Country </th>
-                <th scope="col"> Profilepic </th>
-                <th scope="col"> signature </th>
-                <th scope="col"> Creation_date </th>
+
+                <th scope="col"> Detailed View </th>
             </tr>
 
         </thead>
@@ -53,15 +52,8 @@
                 <td> {{record.Resaddress}} </td>
                 <td> {{record.Officeno}} </td>
                 <td> {{record.Country}} </td>
-                <td>
-                    <img src="{{record.Profilepic.url}}" style="height: 50px;">
-                </td>
-                <td>
-                    <img src="{{record.Signature.url}}" style="height: 50px;">
-                </td>
-                <td> {{record.Creation_date}} </td>
 
-        
+                <td> <a class="btn btn-success btn-sm" href="{% url 'view-member' record.id %}"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </td>
 
             </tr>
 
@@ -73,10 +65,5 @@
 
     </table>
 
-    <br>
-
-    <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberfamily' %}">Family Details</a> |
-    <a class="btn btn-outline-primary btn-sm">Address details</a> |
-    <a class="btn btn-outline-primary btn-sm">Business Details</a>
 
 {% endblock %}

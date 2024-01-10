@@ -1,0 +1,43 @@
+{% extends 'PPMemberClub/base.html' %}
+
+{% block content %}
+
+    <div class="card">
+
+
+        <div class="card-body">
+
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+    
+            <hr> 
+
+            <p> <strong> ID: </strong> {{form.id}} </p>
+            <p> <strong> Full Name: </strong> {{form.Fullname}} </p>
+            <p> <strong> Email: </strong> {{form.Email}} </p>
+            <p> <strong> Dob: </strong> {{form.Dob}} </p>
+            <p> <strong> Resphone: </strong> {{form.Resphone}} </p>
+            <p> <strong> Altermobileno: </strong> {{form.Altermobileno}} </p>
+            <p> <strong> Resaddress: </strong> {{form.Resaddress}} </p>
+            <p> <strong> Officeno: </strong> {{form.Officeno}} </p>
+            <p> <strong> Country: </strong> {{form.Country}} </p>
+            <p> <strong> Profilepic: </strong> <img src="{{form.Profilepic.url}}" style="height: 50px;"> </p>
+            <p> <strong> Signature: </strong> <img src="{{form.Signature.url}}" style="height: 50px;"> </p>
+            <p> <strong> Creation_date: </strong> {{form.Creation_date}} </p>
+
+
+        </div>
+
+
+    </div>
+
+    <br>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+    <br>
+    <br>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberfamily' form.id  %}">Family Details</a> |
+    <a class="btn btn-outline-primary btn-sm">Address details</a> |
+    <a class="btn btn-outline-primary btn-sm">Business Details</a>
+
+
+{% endblock %}

@@ -87,7 +87,23 @@ def dashboard(request):
 
 
 
-# - Add new member data
+
+
+#- View Memberdata
+
+@login_required(login_url='my-login')
+def view_member(request, pk):
+
+    my_records = MemberData.objects.get(id=pk)
+
+    context = {'form' : my_records}
+
+    return render(request, 'PPMemberClub/view-member.html', context=context)
+
+
+
+
+# - Create new member data
 
 @login_required(login_url='my-login')
 def create_member(request):
@@ -96,7 +112,7 @@ def create_member(request):
 
     if request.method == "POST":
 
-        form = CreateMemberData(request.POST)
+        form = CreateMemberData(request.POST, request.FILES)
 
         if form.is_valid():
 
@@ -116,16 +132,38 @@ def create_member(request):
 
 
 # - Update existing member data
+@login_required(login_url='my-login')
+def update_member(request):
+
+    form = UpdateMemberData()
+
+    if request.method == "POST":
+
+        form = CreateMemberData(request.POST, request.FILES)
+
+        if form.is_valid():
+
+            form.save()
+            
+            return redirect("dashboard")
+        
+        else:
+
+            print(form.errors)
+
+    context = {'form' : form}
+
+    return render(request, 'PPMemberClub/create-member.html', context=context)
+
 
 
 
 # - Member Family details
 
 @login_required(login_url='my-login')
-def member_familydetail(request):
+def member_familydetail(request, pk):
 
-    member = MemberData.objects.all()
-    my_records = member.member_id.all()
+    my_records = MemberFamilyData.objects.get(member_id=pk)
 
     context = {'record': my_records}
 

@@ -26,6 +26,16 @@ class LoginForm(AuthenticationForm):
     password = forms.CharField(widget=PasswordInput())
 
 
+# - View member datails
+
+class ViewMemberData(forms.ModelForm):
+
+    class Meta:
+
+        model = MemberData
+        fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
+
+
 # - Create a member
 
 class CreateMemberData(forms.ModelForm):
@@ -45,4 +55,14 @@ class UpdateMemberData(forms.ModelForm):
         model = MemberData
         fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
 
+
+
+# - Delete member datails
+
+class DeleteMemberData(forms.ModelForm):
+
+    class Meta:
+
+        model = MemberData
+        fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
 
