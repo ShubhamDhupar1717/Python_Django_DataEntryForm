@@ -18,10 +18,17 @@ urlpatterns = [
     path('view-memberfamily/<int:pk>', views.view_memberfamily, name="view-memberfamily"),
     path('create-memberfamily/<int:pk>', views.create_memberfamily, name="create-memberfamily"),
     path('update-memberfamily/<int:pk>', views.update_memberfamily, name="update-memberfamily"),
+    path('delete-memberfamily/<int:pk>', views.delete_memberfamily, name="delete-memberfamily"),
 
     #CRUD on MemberAddressData
-    path('view-memberaddress/<int:pk>', views.view_memberAddress, name="view-memberaddress"),
+    path('view-memberaddress/<int:pk>', views.view_memberaddress, name="view-memberaddress"),
+    path('create-memberaddress/<int:pk>', views.create_memberaddress, name="create-memberaddress"),
+    path('update-memberaddress/<int:pk>', views.update_memberaddress, name="update-memberaddress"),
+    path('delete-memberaddress/<int:pk>', views.delete_memberaddress, name="delete-memberaddress"),
 
     #CRUD on MemberBusinessData
-    path('view-memberbusiness/<int:pk>', views.view_memberBusiness, name="view-memberbusiness"),
+    path('view-memberbusiness/<int:pk>', views.view_memberbusiness, name="view-memberbusiness"),
+    path('create-memberbusiness/<int:pk>', views.create_memberbusiness, name="create-memberbusiness"),
+    path('update-memberbusiness/<int:pk>', views.update_memberbusiness, name="update-memberbusiness"),
+    path('delete-memberbusiness/<int:pk>', views.delete_memberbusiness, name="delete-memberbusiness"),
 ]

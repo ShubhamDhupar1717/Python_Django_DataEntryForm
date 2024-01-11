@@ -1,0 +1,68 @@
+{% extends 'PPMemberClub/base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+    <body>
+
+        <div class="container bg-light shadow-md p-5 form-layout">
+
+            <h3> Update Member-Address Details</h3>
+
+            <hr>
+            <br>
+
+            <form method="POST" enctype="multipart/form-data" autocomplete="off">
+
+                {% csrf_token %}
+                
+                {{form.Address|as_crispy_field}}
+
+                <br>
+
+                {{form.Country|as_crispy_field}}
+
+                <br>
+
+                {{form.City|as_crispy_field}}
+
+                <br>
+
+                {{form.State|as_crispy_field}}
+
+                <br>
+
+                {{form.Postalcode|as_crispy_field}}
+
+                <br>
+
+                {{form.Addresstype|as_crispy_field}}
+
+                <br>
+
+                {{form.Additionalinfo|as_crispy_field}}
+
+                <br>
+                <br>
+
+                <button type="submit" class="btn btn-primary"> Submit Form &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
+
+                &nbsp;
+
+                <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Go Back &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+
+
+            </form>
+
+        </div>
+
+        <br>
+
+    </body>
+
+{% endblock %}
+
+
+
