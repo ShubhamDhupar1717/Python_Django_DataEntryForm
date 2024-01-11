@@ -11,8 +11,17 @@ urlpatterns = [
     #CRUD on Member
     path('view-member/<int:pk>', views.view_member, name="view-member"),
     path('create-member', views.create_member, name="create-member"),
-    path('update-member', views.update_member, name="update-member"),
-    
+    path('update-member/<int:pk>', views.update_member, name="update-member"),
+    path('delete-member/<int:pk>', views.delete_member, name="delete-member"),
+
     #CRUD on MemberFamilyData
-    path('view-memberfamily/<int:pk>', views.member_familydetail, name="view-memberfamily"),
+    path('view-memberfamily/<int:pk>', views.view_memberfamily, name="view-memberfamily"),
+    path('create-memberfamily/<int:pk>', views.create_memberfamily, name="create-memberfamily"),
+    path('update-memberfamily/<int:pk>', views.update_memberfamily, name="update-memberfamily"),
+
+    #CRUD on MemberAddressData
+    path('view-memberaddress/<int:pk>', views.view_memberAddress, name="view-memberaddress"),
+
+    #CRUD on MemberBusinessData
+    path('view-memberbusiness/<int:pk>', views.view_memberBusiness, name="view-memberbusiness"),
 ]

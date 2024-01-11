@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, LoginForm, CreateMemberData, UpdateMemberData
+from .forms import CreateUserForm, LoginForm, CreateMemberData, UpdateMemberData, CreateMemberFamilyData, UpdateMemberFamilyData
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
@@ -132,14 +132,17 @@ def create_member(request):
 
 
 # - Update existing member data
-@login_required(login_url='my-login')
-def update_member(request):
 
-    form = UpdateMemberData()
+@login_required(login_url='my-login')
+def update_member(request, pk):
+
+    record = MemberData.objects.get(id=pk)
+
+    form = UpdateMemberData(instance=record)
 
     if request.method == "POST":
 
-        form = CreateMemberData(request.POST, request.FILES)
+        form = UpdateMemberData(request.POST, instance=record)
 
         if form.is_valid():
 
@@ -153,22 +156,127 @@ def update_member(request):
 
     context = {'form' : form}
 
-    return render(request, 'PPMemberClub/create-member.html', context=context)
+    return render(request, 'PPMemberClub/update-member.html', context=context)
 
 
 
 
-# - Member Family details
+# - Delete a record
 
 @login_required(login_url='my-login')
-def member_familydetail(request, pk):
+def delete_member(request, pk):
+
+    record = MemberData.objects.get(id=pk)
+
+    record.delete()
+
+    return redirect("dashboard")
+
+
+
+# - View Member-Family details
+
+@login_required(login_url='my-login')
+def view_memberfamily(request, pk):
 
     my_records = MemberFamilyData.objects.get(member_id=pk)
 
-    context = {'record': my_records}
+    if my_records:
+        context = {'record': my_records}
+        return render(request, 'PPMemberClub/view-memberfamily.html', context=context)
+    else:
+        return redirect('create-memberfamily', pk=pk)
 
-    return render(request, 'PPMemberClub/view-memberfamily.html', context=context)
 
 
 
+
+# Create Member-Family Details
+
+@login_required(login_url='my-login')
+def create_memberfamily(request):
+
+    form = CreateMemberFamilyData()
+
+    if request.method == "POST":
+
+        form = CreateMemberFamilyData(request.POST)
+
+        if form.is_valid():
+            
+            form.save()
+            
+            return redirect("dashboard")
+        
+        else:
+
+            print(form.errors)
+
+    context = {'form' : form}
+
+    return render(request, 'PPMemberClub/create-memberfamily.html', context=context)
+
+
+
+
+
+# - Update existing member family data
+
+@login_required(login_url='my-login')
+def update_memberfamily(request, pk):
+
+    record = MemberFamilyData.objects.get(id=pk)
+
+    form = UpdateMemberFamilyData(instance=record)
+
+    if request.method == "POST":
+
+        form = UpdateMemberFamilyData(request.POST, instance=record)
+
+        if form.is_valid():
+
+            form.save()
+            
+            return redirect("dashboard")
+        
+        else:
+
+            print(form.errors)
+
+    context = {'form' : form}
+
+    return render(request, 'PPMemberClub/update-memberfamily.html', context=context)
+
+
+
+
+
+# - View Member-Address details
+
+@login_required(login_url='my-login')
+def view_memberAddress(request, pk):
+
+    my_records = MemberAddressData.objects.get(member_id=pk)
+
+    if my_records:
+        context = {'record': my_records}
+        return render(request, 'PPMemberClub/view-memberaddress.html', context=context)
+
+
+
+
+
+
+
+# - View Member-Business details
+
+@login_required(login_url='my-login')
+def view_memberBusiness(request, pk):
+
+    my_records = MemberBusinessData.objects.get(member_id=pk)
+
+    if my_records:
+        context = {'record': my_records}
+        return render(request, 'PPMemberClub/view-memberbusiness.html', context=context)
+    
 

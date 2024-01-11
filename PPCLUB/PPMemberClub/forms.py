@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
 from django import forms
-from .models import MemberData
+from .models import MemberData, MemberFamilyData, MemberAddressData, MemberBusinessData
 
 
 
@@ -25,15 +25,6 @@ class LoginForm(AuthenticationForm):
     username = forms.CharField(widget=TextInput())
     password = forms.CharField(widget=PasswordInput())
 
-
-# - View member datails
-
-class ViewMemberData(forms.ModelForm):
-
-    class Meta:
-
-        model = MemberData
-        fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
 
 
 # - Create a member
@@ -57,12 +48,68 @@ class UpdateMemberData(forms.ModelForm):
 
 
 
-# - Delete member datails
+# - Create a member family data
 
-class DeleteMemberData(forms.ModelForm):
+class CreateMemberFamilyData(forms.ModelForm):
 
     class Meta:
 
-        model = MemberData
-        fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
+        model = MemberFamilyData
+        fields = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
 
+
+# - Update member family data
+
+class UpdateMemberFamilyData(forms.ModelForm):
+
+    class Meta:
+
+        model = MemberFamilyData
+        fields = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
+
+
+
+
+
+# - Create a member address data
+
+class CreateMemberAddressData(forms.ModelForm):
+
+    class Meta:
+
+        model = MemberAddressData
+        fields = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
+
+
+# - Update member address data
+
+class UpdateMemberAddressData(forms.ModelForm):
+
+    class Meta:
+
+        model = MemberAddressData
+        fields = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
+
+
+
+
+
+
+# - Create a member business data
+
+class CreateMemberBusinessData(forms.ModelForm):
+
+    class Meta:
+
+        model = MemberBusinessData
+        fields = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
+
+
+# - Update member business data
+
+class UpdateMemberBusinessData(forms.ModelForm):
+
+    class Meta:
+
+        model = MemberBusinessData
+        fields = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']

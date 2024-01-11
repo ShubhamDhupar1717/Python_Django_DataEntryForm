@@ -32,12 +32,14 @@
 
     <br>
 
-    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a> |
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'update-member' form.id %}">Edit Data</a> |
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'delete-member' form.id %}">Delete Data</a>
     <br>
     <br>
     <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberfamily' form.id  %}">Family Details</a> |
-    <a class="btn btn-outline-primary btn-sm">Address details</a> |
-    <a class="btn btn-outline-primary btn-sm">Business Details</a>
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberaddress' form.id  %}">Address details</a> |
+    <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberbusiness' form.id  %}">Business Details</a>
 
 
 {% endblock %}
