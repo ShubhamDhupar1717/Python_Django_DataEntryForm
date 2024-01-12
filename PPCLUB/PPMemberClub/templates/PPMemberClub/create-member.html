@@ -17,46 +17,143 @@
             <form method="POST" enctype="multipart/form-data" autocomplete="off">
 
                 {% csrf_token %}
+                 <!-- this below is the Member creation form -->
 
-                {{form.Fullname|as_crispy_field}}
-
-                <br>
-
-                {{form.Email|as_crispy_field}}
+                {{mform.Fullname|as_crispy_field}}
 
                 <br>
 
-                {{form.Dob|as_crispy_field}}
+                {{mform.Email|as_crispy_field}}
 
                 <br>
 
-                {{form.Resphone|as_crispy_field}}
+                {{mform.Dob|as_crispy_field}}
 
                 <br>
 
-                {{form.Altermobileno|as_crispy_field}}
+                {{mform.Resphone|as_crispy_field}}
 
                 <br>
 
-                {{form.Resaddress|as_crispy_field}}
+                {{mform.Altermobileno|as_crispy_field}}
+
+                <br>
+
+                {{mform.Resaddress|as_crispy_field}}
 
                 <br>
                 
-                {{form.Country|as_crispy_field}}
+                {{mform.Country|as_crispy_field}}
 
                 <br>
 
-                {{form.Officeno|as_crispy_field}}
+                {{mform.Officeno|as_crispy_field}}
 
                 <br>
 
-                {{form.Profilepic|as_crispy_field}}
+                {{mform.Profilepic|as_crispy_field}}
 
                 <br>
 
-                {{form.Signature|as_crispy_field}}
+                {{mform.Signature|as_crispy_field}}
 
                 <br>
+                <br>
+
+
+                <!-- this below is the Member-Family creation form -->
+
+
+                {{mfform.firstname|as_crispy_field}}
+
+                <br>
+
+                {{mfform.lastname|as_crispy_field}}
+
+                <br>
+
+                {{mfform.relation|as_crispy_field}}
+
+                <br>
+
+                {{mfform.contactno|as_crispy_field}}
+
+                <br>
+
+                {{mfform.homeaddress|as_crispy_field}}
+
+                <br>
+
+                {{mfform.Spousename|as_crispy_field}}
+
+                <br>
+                
+                {{mfform.Spousedob|as_crispy_field}}
+
+                <br>
+
+                {{mfform.Childname|as_crispy_field}}
+
+                <br>
+                <br>
+
+                 <!-- this below is the Member-Address creation form -->
+
+                 {{maform.Address|as_crispy_field}}
+
+                <br>
+
+                {{maform.Country|as_crispy_field}}
+
+                <br>
+
+                {{maform.City|as_crispy_field}}
+
+                <br>
+
+                {{maform.State|as_crispy_field}}
+
+                <br>
+
+                {{maform.Postalcode|as_crispy_field}}
+
+                <br>
+
+                {{maform.Addresstype|as_crispy_field}}
+
+                <br>
+
+                {{maform.Additionalinfo|as_crispy_field}}
+
+                <br>
+                <br>
+
+                <!-- this below is the Member-Address creation form -->
+
+                {{mbform.Businessname|as_crispy_field}}
+
+                <br>
+
+                {{mbform.Businessdetails|as_crispy_field}}
+
+                <br>
+
+                {{mbform.Businessaddress|as_crispy_field}}
+
+                <br>
+
+                {{mbform.Businesscity|as_crispy_field}}
+
+                <br>
+
+                {{mbform.Businessemail|as_crispy_field}}
+
+                <br>
+
+                {{mbform.Businesspostalcode|as_crispy_field}}
+
+                <br>
+
 
                 <button type="submit" class="btn btn-primary"> Submit Form &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
 

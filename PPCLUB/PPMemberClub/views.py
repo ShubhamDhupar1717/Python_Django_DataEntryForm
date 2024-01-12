@@ -109,23 +109,36 @@ def view_member(request, pk):
 @login_required(login_url='my-login')
 def create_member(request):
 
-    form = CreateMemberData()
-
+    form1 = CreateMemberData()
+    form2 = CreateMemberFamilyData()
+    form3 = CreateMemberAddressData()
+    form4 = CreateMemberBusinessData()
     if request.method == "POST":
 
-        form = CreateMemberData(request.POST, request.FILES)
+        form1 = CreateMemberData(request.POST, request.FILES)
+        form2 = CreateMemberFamilyData(request.POST)
+        form3 = CreateMemberAddressData(request.POST)
+        form4 = CreateMemberBusinessData(request.POST)
 
-        if form.is_valid():
+        if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
+            member_instance = form1.save()  # Save the member form and get the model instance
+            form2.instance.member_id = member_instance.id
+            form2.save()
 
-            form.save()
-            
-            return redirect("dashboard")
+            form3.instance.member_id = member_instance.id
+            form3.save()
+
+            form4.instance.member_id = member_instance.id
+            form4.save()  
+
+            return redirect('dashboard')
         
         else:
+            print(form1.errors)
 
-            print(form.errors)
+        
 
-    context = {'form' : form}
+    context = {'mform' : form1, 'mfform' : form2, 'maform' : form3, 'mbform' : form4}
 
     return render(request, 'PPMemberClub/create-member.html', context=context)
 
@@ -247,17 +260,6 @@ def update_memberfamily(request, pk):
 
 
 
-# - Delete a record
-
-@login_required(login_url='my-login')
-def delete_memberfamily(request, pk):
-
-    record = MemberFamilyData.objects.get(id=pk)
-
-    record.delete()
-
-    return redirect("dashboard")
-
 #############################################################################################################################################################################################
 
 
@@ -328,19 +330,6 @@ def update_memberaddress(request, pk):
     context = {'form' : form}
 
     return render(request, 'PPMemberClub/update-memberaddress.html', context=context)
-
-
-
-# - Delete a record
-
-@login_required(login_url='my-login')
-def delete_memberaddress(request, pk):
-
-    record = MemberAddressData.objects.get(id=pk)
-
-    record.delete()
-
-    return redirect("dashboard")
 
 
 
@@ -415,18 +404,6 @@ def update_memberbusiness(request, pk):
 
     return render(request, 'PPMemberClub/update-memberbusiness.html', context=context)
 
-
-
-# - Delete a record
-
-@login_required(login_url='my-login')
-def delete_memberbusiness(request, pk):
-
-    record = MemberBusinessData.objects.get(id=pk)
-
-    record.delete()
-
-    return redirect("dashboard")
     
 
 #############################################################################################################################################################################################
