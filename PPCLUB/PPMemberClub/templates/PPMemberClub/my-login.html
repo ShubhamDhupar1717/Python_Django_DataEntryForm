@@ -8,6 +8,9 @@
     <body>
 
         <div class="container bg-light shadow-md p-5 form-layout">
+            {%for message in messages%}
+                <h3 style="color:greenyellow;">{{message}}</h3>
+            {% endfor %}
 
             <h3> Login to your account </h3>
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class MemberData(models.Model):
@@ -93,3 +94,4 @@ class MemberBusinessData(models.Model):
     Businesspostalcode = models.CharField(max_length=100)
 
     member = models.ForeignKey(MemberData, on_delete=models.CASCADE)
+

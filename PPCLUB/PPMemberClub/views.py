@@ -4,9 +4,10 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from .models import MemberData, MemberFamilyData, MemberAddressData, MemberBusinessData
-
 from django.contrib import messages
-# Create your views here.
+from .decorator import unauthenticated_user, allowed_users, admin_only
+from django.contrib.auth.models import Group
+
 
 def Home(request):
     #return HttpResponse('Hey there...')
@@ -16,7 +17,7 @@ def Home(request):
 #############################################################################################################################################################################################
 
 # - Register a user
-
+@unauthenticated_user
 def register(request):
 
     form = CreateUserForm()
@@ -27,7 +28,14 @@ def register(request):
 
         if form.is_valid():
 
-            form.save()
+            user = form.save()
+
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name='NormalUsers')
+            user.groups.add(group)
+            
+            messages.success(request, 'Account created successfully! Welcome ' + username)
 
             return redirect("my-login")
 
@@ -37,7 +45,7 @@ def register(request):
 
 
 # - Login a user
-
+@unauthenticated_user
 def my_login(request):
 
     form = LoginForm()
@@ -55,6 +63,7 @@ def my_login(request):
 
             if user is not None:
                 auth.login(request, user)
+                messages.success(request, 'Successfully Logged in!!')
                 return redirect("dashboard")    
 
     context = {'form':form}
@@ -69,7 +78,7 @@ def user_logout(request):
 
     auth.logout(request)
 
-    messages.success(request, "Logout success!")
+    messages.success(request, "Logout successfully!")
 
     return redirect("my-login")
 
@@ -107,6 +116,7 @@ def view_member(request, pk):
 # - Create new member data
 
 @login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
 def create_member(request):
 
     form1 = CreateMemberData()
@@ -121,16 +131,19 @@ def create_member(request):
         form4 = CreateMemberBusinessData(request.POST)
 
         if form1.is_valid() and form2.is_valid() and form3.is_valid() and form4.is_valid():
-            member_instance = form1.save()  # Save the member form and get the model instance
-            form2.instance.member_id = member_instance.id
+            member = form1.save()
+
+            form2.instance.member_id = member.id
             form2.save()
 
-            form3.instance.member_id = member_instance.id
+            form3.instance.member_id = member.id
             form3.save()
 
-            form4.instance.member_id = member_instance.id
+            form4.instance.member_id = member.id
             form4.save()  
 
+            messages.success(request, "Your record was created!")
+            
             return redirect('dashboard')
         
         else:
@@ -147,6 +160,7 @@ def create_member(request):
 # - Update existing member data
 
 @login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
 def update_member(request, pk):
 
     record = MemberData.objects.get(id=pk)
@@ -176,11 +190,14 @@ def update_member(request, pk):
 # - Delete a record
 
 @login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
 def delete_member(request, pk):
 
     record = MemberData.objects.get(id=pk)
 
     record.delete()
+
+    messages.success(request, "Your record was deleted!")
 
     return redirect("dashboard")
 
@@ -234,6 +251,7 @@ def create_memberfamily(request):
 # - Update existing member family data
 
 @login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
 def update_memberfamily(request, pk):
 
     record = MemberFamilyData.objects.get(id=pk)
@@ -307,6 +325,7 @@ def create_memberaddress(request):
 # - Update existing member family data
 
 @login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
 def update_memberaddress(request, pk):
 
     record = MemberAddressData.objects.get(id=pk)
@@ -380,6 +399,7 @@ def create_memberbusiness(request):
 # - Update existing member family data
 
 @login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
 def update_memberbusiness(request, pk):
 
     record = MemberBusinessData.objects.get(id=pk)
