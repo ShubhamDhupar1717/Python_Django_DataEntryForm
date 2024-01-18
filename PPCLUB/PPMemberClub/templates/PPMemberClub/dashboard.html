@@ -2,11 +2,13 @@
 
 {% block content %}
 
-    <h5> Welcome, {{user}}! 👋 </h5>
+    <h5> Welcome, {{user}} user! 👋 </h5>
 
     <hr> 
 
-    <a class="btn btn-outline-primary btn-sm" href="{% url 'create-member' %}">Create a new record &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+    {% if request.user.is_superuser %}
+        <a class="btn btn-outline-primary btn-sm" href="{% url 'create-member' %}">Create a new record &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+    {% endif %}
 
     <br>
     <br>

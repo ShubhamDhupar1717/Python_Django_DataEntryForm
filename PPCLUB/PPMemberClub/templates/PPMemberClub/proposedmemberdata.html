@@ -1,0 +1,53 @@
+{% extends 'PPMemberClub/base.html' %}
+
+{% block content %}
+  <h2>Change Request for Member</h2>
+  <form method="POST" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+    <div class="card-body">
+
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+        <hr> 
+        <h1>Proposed Member Data</h1>
+        <p> <strong> ID: </strong> {{form1.id}} </p>
+        <p> <strong> Full Name: </strong> {{form1.Fullname}} </p>
+        <p> <strong> Email: </strong> {{form1.Email}} </p>
+        <p> <strong> Dob: </strong> {{form1.Dob}} </p>
+        <p> <strong> Resphone: </strong> {{form1.Resphone}} </p>
+        <p> <strong> Altermobileno: </strong> {{form1.Altermobileno}} </p>
+        <p> <strong> Resaddress: </strong> {{form1.Resaddress}} </p>
+        <p> <strong> Officeno: </strong> {{form1.Officeno}} </p>
+        <p> <strong> Country: </strong> {{form1.Country}} </p>
+        <p> <strong> Profilepic: </strong> <img src="{{form1.Profilepic.url}}" style="height: 50px;"> </p>
+        <p> <strong> Signature: </strong> <img src="{{form1.Signature.url}}" style="height: 50px;"> </p>
+        <p> <strong> Creation_date: </strong> {{form1.Creation_date}} </p>
+
+
+    </div>
+    <br>
+    <br>
+    <div class="card-body">
+
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+        <hr> 
+        <h1>Current Member Data</h1>
+        <p> <strong> ID: </strong> {{form2.id}} </p>
+        <p> <strong> Full Name: </strong> {{form2.Fullname}} </p>
+        <p> <strong> Email: </strong> {{form2.Email}} </p>
+        <p> <strong> Dob: </strong> {{form2.Dob}} </p>
+        <p> <strong> Resphone: </strong> {{form2.Resphone}} </p>
+        <p> <strong> Altermobileno: </strong> {{form2.Altermobileno}} </p>
+        <p> <strong> Resaddress: </strong> {{form2.Resaddress}} </p>
+        <p> <strong> Officeno: </strong> {{form2.Officeno}} </p>
+        <p> <strong> Country: </strong> {{form2.Country}} </p>
+        <p> <strong> Profilepic: </strong> <img src="{{form2.Profilepic.url}}" style="height: 50px;"> </p>
+        <p> <strong> Signature: </strong> <img src="{{form2.Signature.url}}" style="height: 50px;"> </p>
+        <p> <strong> Creation_date: </strong> {{form2.Creation_date}} </p>
+
+
+    </div>
+    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
+  </form>
+{% endblock %}

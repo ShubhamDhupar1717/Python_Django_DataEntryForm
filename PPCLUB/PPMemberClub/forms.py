@@ -3,7 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.forms.widgets import PasswordInput, TextInput
 from django import forms
-from .models import MemberData, MemberFamilyData, MemberAddressData, MemberBusinessData
+from .models import MemberData, MemberFamilyData, MemberAddressData, MemberBusinessData, ProposedMemberData
 
 
 
@@ -114,3 +114,41 @@ class UpdateMemberBusinessData(forms.ModelForm):
 
         model = MemberBusinessData
         fields = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
+
+
+
+
+
+
+
+
+
+class ProposedMemberDataForm(forms.ModelForm):
+    class Meta:
+        model = ProposedMemberData
+        fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
+        
+
+
+class ProposedMemberFamilyDataForm(forms.ModelForm):
+    class Meta:
+        model = ProposedMemberData
+        fields = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
+                        
+
+
+class ProposedMemberAddressDataForm(forms.ModelForm):
+    class Meta:
+        model = ProposedMemberData
+        fields = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
+        
+
+
+class ProposedMemberBusinessDataForm(forms.ModelForm):
+    class Meta:
+        model = ProposedMemberData
+        fields = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
+
+        
+
+        

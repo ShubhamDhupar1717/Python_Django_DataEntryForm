@@ -28,4 +28,7 @@ urlpatterns = [
     path('view-memberbusiness/<int:pk>', views.view_memberbusiness, name="view-memberbusiness"),
     path('create-memberbusiness/<int:pk>', views.create_memberbusiness, name="create-memberbusiness"),
     path('update-memberbusiness/<int:pk>', views.update_memberbusiness, name="update-memberbusiness"),
+
+     #ProposedData Update on Member Details
+    path('proposedmemberdata/<int:pk>', views.proposed_memberdata, name="proposedmemberdata"),
 ]
