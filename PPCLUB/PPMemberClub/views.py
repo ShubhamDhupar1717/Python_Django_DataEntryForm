@@ -160,7 +160,6 @@ def create_member(request):
 # - Update existing member data
 
 @login_required(login_url='my-login')
-
 def update_member(request, pk):
     # Retrieve the existing member data
     record = MemberData.objects.get(id=pk)
@@ -211,6 +210,8 @@ def update_member(request, pk):
 @allowed_users(allowed_roles=['SuperUsers'])
 def proposed_memberdata(request, pk):
     proposeddata = ProposedMemberData.objects.get(proposed_memberdata_id=pk)
+    if not(proposeddata):
+        return redirect("dashboard")
     memberdata = MemberData.objects.get(id=pk)
 
     fields_to_copy = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
@@ -225,6 +226,7 @@ def proposed_memberdata(request, pk):
     if request.method == 'POST':
         if form2.is_valid():
             form2.save()
+            proposeddata.delete()
             return redirect("dashboard")
 
 
@@ -344,6 +346,40 @@ def update_memberfamily(request, pk):
 
 
 
+
+
+    
+# - FrontDesk User Update Permission / Proposed data ready to be Accept or Reject.
+
+@login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
+def proposed_memberfamilydata(request, pk):
+    proposeddata = ProposedMemberData.objects.get(proposed_memberfamilydata_id=pk)
+    if not(proposeddata):
+        return redirect("dashboard")
+    memberfamilydata = MemberFamilyData.objects.get(id=pk)
+
+    fields_to_copy = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
+
+    form_data = {field: getattr(proposeddata, field) for field in fields_to_copy}
+
+    form1 = ProposedMemberFamilyDataForm(request.POST or None, instance=proposeddata)
+    #form2 = UpdateMemberData(request.POST or None, instance=memberdata)
+    form2 = UpdateMemberFamilyData(request.POST or None, initial=form_data, instance=memberfamilydata)
+
+    # If the user clicks on Accept button, save the proposed data into the MemberData Table
+    if request.method == 'POST':
+        if form2.is_valid():
+            form2.save()
+            proposeddata.delete()
+            return redirect("dashboard")
+
+
+    context = {'form1': form1, 'form2': form2}
+    return render(request, 'PPMemberClub/proposedmemberfamilydata.html', context)
+
+
+
 #############################################################################################################################################################################################
 
 
@@ -437,6 +473,38 @@ def update_memberaddress(request, pk):
 
 
 
+
+# - FrontDesk User Update Permission / Proposed data ready to be Accept or Reject.
+
+@login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
+def proposed_memberaddressdata(request, pk):
+    proposeddata = ProposedMemberData.objects.get(proposed_memberaddressdata_id=pk)
+    if not(proposeddata):
+        return redirect("dashboard")
+    memberaddressdata = MemberAddressData.objects.get(id=pk)
+
+    fields_to_copy = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
+
+    form_data = {field: getattr(proposeddata, field) for field in fields_to_copy}
+
+    form1 = ProposedMemberAddressDataForm(request.POST or None, instance=proposeddata)
+    #form2 = UpdateMemberData(request.POST or None, instance=memberdata)
+    form2 = UpdateMemberAddressData(request.POST or None, initial=form_data, instance=memberaddressdata)
+
+    # If the user clicks on Accept button, save the proposed data into the MemberData Table
+    if request.method == 'POST':
+        if form2.is_valid():
+            form2.save()
+            proposeddata.delete()
+            return redirect("dashboard")
+
+
+    context = {'form1': form1, 'form2': form2}
+    return render(request, 'PPMemberClub/proposedmemberaddressdata.html', context)
+
+
+
 #############################################################################################################################################################################################
 
 
@@ -527,6 +595,39 @@ def update_memberbusiness(request, pk):
     context = {'form': form} if request.user.is_superuser else {'form': form1}
 
     return render(request, 'PPMemberClub/update-memberbusiness.html', context=context)
+
+
+
+
+
+# - FrontDesk User Update Permission / Proposed data ready to be Accept or Reject.
+
+@login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
+def proposed_memberbusinessdata(request, pk):
+    proposeddata = ProposedMemberData.objects.get(proposed_memberbusinessdata_id=pk)
+    if not(proposeddata):
+        return redirect("dashboard")
+    memberbusinessdata = MemberBusinessData.objects.get(id=pk)
+
+    fields_to_copy = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
+
+    form_data = {field: getattr(proposeddata, field) for field in fields_to_copy}
+
+    form1 = ProposedMemberBusinessDataForm(request.POST or None, instance=proposeddata)
+    #form2 = UpdateMemberData(request.POST or None, instance=memberdata)
+    form2 = UpdateMemberBusinessData(request.POST or None, initial=form_data, instance=memberbusinessdata)
+
+    # If the user clicks on Accept button, save the proposed data into the MemberData Table
+    if request.method == 'POST':
+        if form2.is_valid():
+            form2.save()
+            proposeddata.delete()
+            return redirect("dashboard")
+
+
+    context = {'form1': form1, 'form2': form2}
+    return render(request, 'PPMemberClub/proposedmemberbusinessdata.html', context)
 
     
 

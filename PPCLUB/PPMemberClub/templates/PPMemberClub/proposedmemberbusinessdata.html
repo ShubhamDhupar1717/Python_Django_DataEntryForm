@@ -1,0 +1,42 @@
+{% extends 'PPMemberClub/base.html' %}
+
+{% block content %}
+  <h2>Change Request for Member</h2>
+  <form method="POST" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+    <div class="card-body">
+
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+        <hr> 
+        <h1>Proposed Member Data</h1>
+        <p> <strong> ID: </strong> {{form1.id}} </p>
+        <p> <strong> Full Name: </strong> {{form1.Businessname}} </p>
+        <p> <strong> Email: </strong> {{form1.Businessdetails}} </p>
+        <p> <strong> Dob: </strong> {{form1.Businessaddress}} </p>
+        <p> <strong> Resphone: </strong> {{form1.Businesscity}} </p>
+        <p> <strong> Altermobileno: </strong> {{form1.Businessemail}} </p>
+        <p> <strong> Resaddress: </strong> {{form1.Businesspostalcode}} </p>
+
+    </div>
+    <br>
+    <br>
+    <div class="card-body">
+
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+        <hr> 
+        <h1>Current Member Data</h1>
+        <p> <strong> ID: </strong> {{form2.id}} </p>
+        <p> <strong> Full Name: </strong> {{form2.Businessname}} </p>
+        <p> <strong> Email: </strong> {{form2.Businessdetails}} </p>
+        <p> <strong> Dob: </strong> {{form2.Businessaddress}} </p>
+        <p> <strong> Resphone: </strong> {{form2.Businesscity}} </p>
+        <p> <strong> Altermobileno: </strong> {{form2.Businessemail}} </p>
+        <p> <strong> Resaddress: </strong> {{form2.Businesspostalcode}} </p>
+
+
+    </div>
+    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
+  </form>
+{% endblock %}

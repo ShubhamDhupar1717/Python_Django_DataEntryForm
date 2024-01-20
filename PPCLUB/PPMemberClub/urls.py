@@ -31,4 +31,7 @@ urlpatterns = [
 
      #ProposedData Update on Member Details
     path('proposedmemberdata/<int:pk>', views.proposed_memberdata, name="proposedmemberdata"),
+    path('proposedmemberfamilydata/<int:pk>', views.proposed_memberfamilydata, name="proposedmemberfamilydata"),
+    path('proposedmemberaddressdata/<int:pk>', views.proposed_memberaddressdata, name="proposedmemberaddressdata"),
+    path('proposedmemberbusinessdata/<int:pk>', views.proposed_memberbusinessdata, name="proposedmemberbusinessdata"),
 ]

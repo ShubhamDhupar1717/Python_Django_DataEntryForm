@@ -32,5 +32,10 @@
     <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a> |
     <a class="btn btn-outline-primary btn-sm" href="{% url 'update-memberaddress' record.id %}">Edit Data</a>
 
+    {% if request.user.is_superuser %}
+    &nbsp;
+    <a class="btn btn-outline-info btn-sm" href="{% url 'proposedmemberaddressdata' record.id %}">Pending Request</a>
+    {% endif %}
+
 
 {% endblock %}

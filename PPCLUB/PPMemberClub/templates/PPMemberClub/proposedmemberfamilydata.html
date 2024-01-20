@@ -1,0 +1,47 @@
+{% extends 'PPMemberClub/base.html' %}
+
+{% block content %}
+  <h2>Change Request for Member</h2>
+  <form method="POST" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+    <div class="card-body">
+
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+        <hr> 
+        <h1>Proposed Member-Family Data</h1>
+        <p> <strong> ID: </strong> {{form1.id}} </p>
+        <p> <strong> Full Name: </strong> {{form1.firstname}} </p>
+        <p> <strong> Email: </strong> {{form1.lastname}} </p>
+        <p> <strong> Dob: </strong> {{form1.relation}} </p>
+        <p> <strong> Resphone: </strong> {{form1.contactno}} </p>
+        <p> <strong> Altermobileno: </strong> {{form1.homeaddress}} </p>
+        <p> <strong> Resaddress: </strong> {{form1.Spousename}} </p>
+        <p> <strong> Officeno: </strong> {{form1.Spousedob}} </p>
+        <p> <strong> Creation_date: </strong> {{form1.Childname}} </p>
+
+
+    </div>
+    <br>
+    <br>
+    <div class="card-body">
+
+        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+        <hr> 
+        <h1>Current Member-Family Data</h1>
+        <p> <strong> ID: </strong> {{form2.id}} </p>
+        <p> <strong> Full Name: </strong> {{form2.firstname}} </p>
+        <p> <strong> Email: </strong> {{form2.lastname}} </p>
+        <p> <strong> Dob: </strong> {{form2.relation}} </p>
+        <p> <strong> Resphone: </strong> {{form2.contactno}} </p>
+        <p> <strong> Altermobileno: </strong> {{form2.homeaddress}} </p>
+        <p> <strong> Resaddress: </strong> {{form2.Spousename}} </p>
+        <p> <strong> Officeno: </strong> {{form2.Spousedob}} </p>
+        <p> <strong> Creation_date: </strong> {{form2.Childname}} </p>
+
+
+    </div>
+    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
+  </form>
+{% endblock %}
