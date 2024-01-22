@@ -2,31 +2,75 @@
 
 {% block content %}
 
-    <div class="card">
 
 
+    <div class="card" style="border-radius:20px;">
         <div class="card-body">
-
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
-
-            <h3>Member-Family Details</h3>
-            <hr> 
-
-            <p> <strong> ID: </strong> {{record.id}} </p>
-            <p> <strong> First Name: </strong> {{record.firstname}} </p>
-            <p> <strong> Last Name: </strong> {{record.lastname}} </p>
-            <p> <strong> relation: </strong> {{record.relation}} </p>
-            <p> <strong> contactno: </strong> {{record.contactno}} </p>
-            <p> <strong> homeaddress: </strong> {{record.homeaddress}} </p>
-            <p> <strong> Spousename: </strong> {{record.Spousename}} </p>
-            <p> <strong> Spousedob: </strong> {{record.Spousedob}} </p>
-            <p> <strong> Childname: </strong> {{record.Childname}} </p>
-
-
+        <p> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <h3>Member Family Details</h3> </p>
+        <hr />
+            <dl class="row">
+        
+                <dt class="col-sm-2">
+                    ID :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.id}}
+                </dd>
+                <dt class="col-sm-2">
+                    First Name :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.firstname}} 
+                </dd>
+    
+                <dt class="col-sm-2">
+                    Last Name :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.lastname}}
+                </dd>
+                <dt class="col-sm-2">
+                    relation :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.relation}}
+                </dd>
+                <dt class="col-sm-2">
+                    Contact Number :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.contactno}}
+                </dd>
+                <dt class="col-sm-2">
+                    Home Address :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.homeaddress}}
+                </dd>
+                <dt class="col-sm-2">
+                    Spouse Name :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.Spousename}}
+                </dd>
+                <dt class="col-sm-2">
+                   Spouse D.O.B :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.Spousedob}}
+                </dd>
+                <dt class="col-sm-2">
+                    Child Name :
+                </dt>
+                <dd class="col-sm-10">
+                    {{record.Childname}}
+                </dd>
+                
+            </dl>
+        </div>
         </div>
 
 
-    </div>
 
     <br>
 

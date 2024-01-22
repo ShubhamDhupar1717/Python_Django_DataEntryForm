@@ -35,6 +35,14 @@ class CreateMemberData(forms.ModelForm):
 
         model = MemberData
         fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
+        labels = {
+            "Fullname": "Full Name",
+            "Dob": "Date of Birth",
+            "Resphone": "Registered Phone No.",
+            "Altermobileno": "Alternate Phone No.",
+            "Officeno": "Office No.",
+            "Resaddress": "Registered Address",
+            }
 
 
 # - Update member datails
@@ -45,7 +53,14 @@ class UpdateMemberData(forms.ModelForm):
 
         model = MemberData
         fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
-
+        labels = {
+            "Fullname": "Full Name",
+            "Dob": "Date of Birth",
+            "Resphone": "Registered Phone No.",
+            "Altermobileno": "Alternate Phone No.",
+            "Officeno": "Office No.",
+            "Resaddress": "Registered Address",
+            }
 
 
 
@@ -57,6 +72,14 @@ class CreateMemberFamilyData(forms.ModelForm):
 
         model = MemberFamilyData
         fields = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
+        labels = {
+            "Firstname": "First Name",
+            "Lastname": "Last Name",
+            "contactno": "Contact Number",
+            "Spousename": "Spouse Name",
+            "Spousedob": "Spouse D.O.B",
+            "homeaddress": "Home Address",
+            }
 
 
 # - Update member family data
@@ -67,6 +90,14 @@ class UpdateMemberFamilyData(forms.ModelForm):
 
         model = MemberFamilyData
         fields = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
+        labels = {
+            "Firstname": "First Name",
+            "Lastname": "Last Name",
+            "contactno": "Contact Number",
+            "Spousename": "Spouse Name",
+            "Spousedob": "Spouse D.O.B",
+            "homeaddress": "Home Address",
+            }
 
 
 
@@ -104,6 +135,14 @@ class CreateMemberBusinessData(forms.ModelForm):
 
         model = MemberBusinessData
         fields = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
+        labels = {
+            "Businessname": "Business Name",
+            "Businessdetails": "Business Details",
+            "Businessaddress": "Business Address",
+            "Businesscity": "Business City",
+            "Businessemail": "Business Email",
+            "Businesspostalcode": "Business Postal Code",
+            }
 
 
 # - Update member business data
@@ -114,6 +153,15 @@ class UpdateMemberBusinessData(forms.ModelForm):
 
         model = MemberBusinessData
         fields = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
+        labels = {
+            "Businessname": "Business Name",
+            "Businessdetails": "Business Details",
+            "Businessaddress": "Business Address",
+            "Businesscity": "Business City",
+            "Businessemail": "Business Email",
+            "Businesspostalcode": "Business Postal Code",
+            }
+
 
 
 

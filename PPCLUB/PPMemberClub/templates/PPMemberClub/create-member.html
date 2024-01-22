@@ -7,7 +7,7 @@
 
     <body>
 
-        <div class="container bg-light shadow-md p-5 form-layout">
+        <div class=" bg-dark shadow-md p-4" style="border-radius: 20px; border:black">
 
             <h3> Create Member </h3>
 
@@ -17,6 +17,9 @@
             <form method="POST" enctype="multipart/form-data" autocomplete="off">
 
                 {% csrf_token %}
+                <div class="row">
+
+                <div class="col">
                  <!-- this below is the Member creation form -->
 
                 {{mform.Fullname|as_crispy_field}}
@@ -59,8 +62,9 @@
 
                 <br>
                 <br>
+                </div>
 
-
+                <div class="col">
                 <!-- this below is the Member-Family creation form -->
 
 
@@ -96,7 +100,10 @@
 
                 <br>
                 <br>
+                </div>
 
+
+                <div class="col">
                  <!-- this below is the Member-Address creation form -->
 
                  {{maform.Address|as_crispy_field}}
@@ -127,7 +134,10 @@
 
                 <br>
                 <br>
+                </div>
 
+
+                <div class="col">
                 <!-- this below is the Member-Address creation form -->
 
                 {{mbform.Businessname|as_crispy_field}}
@@ -153,14 +163,14 @@
                 {{mbform.Businesspostalcode|as_crispy_field}}
 
                 <br>
-
+            </div>
 
                 <button type="submit" class="btn btn-primary"> Submit Form &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
 
                 &nbsp;
 
                 <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Go Back &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i></a>
-
+            </div>
 
             </form>
 
