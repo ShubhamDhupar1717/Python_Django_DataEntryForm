@@ -111,6 +111,10 @@ class CreateMemberAddressData(forms.ModelForm):
 
         model = MemberAddressData
         fields = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
+        labels = {
+            "Addresstype": "Address Type",
+            "Additionalinfo": "Additional Information",
+            }
 
 
 # - Update member address data
@@ -121,7 +125,10 @@ class UpdateMemberAddressData(forms.ModelForm):
 
         model = MemberAddressData
         fields = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
-
+        labels = {
+            "Addresstype": "Address Type",
+            "Additionalinfo": "Additional Information",
+            }
 
 
 
@@ -175,6 +182,14 @@ class ProposedMemberDataForm(forms.ModelForm):
     class Meta:
         model = ProposedMemberData
         fields = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
+        labels = {
+            "Fullname": "Full Name",
+            "Dob": "Date of Birth",
+            "Resphone": "Registered Phone No.",
+            "Altermobileno": "Alternate Phone No.",
+            "Officeno": "Office No.",
+            "Resaddress": "Registered Address",
+            }
         
 
 
@@ -182,6 +197,14 @@ class ProposedMemberFamilyDataForm(forms.ModelForm):
     class Meta:
         model = ProposedMemberData
         fields = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
+        labels = {
+            "Firstname": "First Name",
+            "Lastname": "Last Name",
+            "contactno": "Contact Number",
+            "Spousename": "Spouse Name",
+            "Spousedob": "Spouse D.O.B",
+            "homeaddress": "Home Address",
+            }
                         
 
 
@@ -189,6 +212,10 @@ class ProposedMemberAddressDataForm(forms.ModelForm):
     class Meta:
         model = ProposedMemberData
         fields = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
+        labels = {
+            "Addresstype": "Address Type",
+            "Additionalinfo": "Additional Information",
+            }
         
 
 
@@ -196,6 +223,14 @@ class ProposedMemberBusinessDataForm(forms.ModelForm):
     class Meta:
         model = ProposedMemberData
         fields = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
+        labels = {
+            "Businessname": "Business Name",
+            "Businessdetails": "Business Details",
+            "Businessaddress": "Business Address",
+            "Businesscity": "Business City",
+            "Businessemail": "Business Email",
+            "Businesspostalcode": "Business Postal Code",
+            }
 
         
 

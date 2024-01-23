@@ -4,87 +4,93 @@
 
 
 
-    <div class="card" style="border-radius:20px;">
-        <div class="card-body">
+    <div class="text-white" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+        <div>
         <p> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <h3>{{ form.Fullname }} Details</h3> </p>
         <hr />
-            <dl class="row">
-        
-                <dt class="col-sm-2">
-                    Profile Photo :
-                </dt>
-                <dd class="col-sm-10">
-                    <img src="{{form.Profilepic.url}}" style="height: 100px;">
-                </dd>
-                <dt class="col-sm-2">
-                    Signature :
-                </dt>
-                <dd class="col-sm-10">
-                    <img src="{{form.Signature.url}}" style="height: 100px;"> 
-                </dd>
-    
-                <dt class="col-sm-2">
+    <div class="row">
+        <div class="col">
+            <dl class="row">    
+                <dt class="col-4">
                     D.O.B :
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-5">
                     {{form.Dob}}
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-4">
                     Registered Address :
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-5">
                     {{form.Resaddress}}
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-4">
                     Registered Phone :
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-5">
                     {{form.Resphone}}
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-4">
                     Office No. :
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-5">
                     {{form.Officeno}}
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-4">
                     Alternate Mobile No. :
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-5">
                     {{form.Altermobileno}}
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-4">
                    Email :
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-5">
                     {{form.Email}}
                 </dd>
-                <dt class="col-sm-2">
+                <dt class="col-4">
                     Form Created On :
                 </dt>
-                <dd class="col-sm-10">
+                <dd class="col-5">
                     {{form.Creation_date}}
                 </dd>
-                
             </dl>
+        </div>
+
+        <div class="col">
+            <dl class="row">
+                <dt class="col-4">
+                    Profile Photo :
+                </dt>
+                <dd class="col-5">
+                    <img src="{{form.Profilepic.url}}" style="height: 100px;">
+                </dd>
+                <dt class="col-4">
+                    Signature :
+                </dt>
+                <dd class="col-5">
+                    <img src="{{form.Signature.url}}" style="height: 100px;"> 
+                </dd>
+            </dl>
+        </div>
+    </div>
         </div>
         </div>
 
     <br>
 
-    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a> |
-    <a class="btn btn-outline-primary btn-sm" href="{% url 'update-member' form.id %}">Edit Data</a> 
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a> &nbsp; &nbsp;
+    <a class="btn btn-primary" href="{% url 'update-member' form.id %}">Edit Data</a>  &nbsp; &nbsp;
     {% if request.user.is_superuser %}
         &nbsp;
-        <a class="btn btn-outline-primary btn-sm" href="{% url 'delete-member' form.id %}">Delete Data</a>
+        <a class="btn btn-danger" href="{% url 'delete-member' form.id %}">Delete Data</a>
         &nbsp;
-        <a class="btn btn-outline-info btn-sm" href="{% url 'proposedmemberdata' form.id %}">Pending Request</a>
+        <a class="btn btn-info" href="{% url 'proposedmemberdata' form.id %}">Pending Request</a>
     {% endif %}
     <br>
     <br>
-    <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberfamily' form.id  %}">Family Details</a> |
-    <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberaddress' form.id  %}">Address details</a> |
-    <a class="btn btn-outline-primary btn-sm" href="{% url 'view-memberbusiness' form.id  %}">Business Details</a>
+    <a class="btn btn-primary" href="{% url 'view-memberfamily' form.id  %}">Family Details</a>  &nbsp; &nbsp;
+    <a class="btn btn-primary" href="{% url 'view-memberaddress' form.id  %}">Address details</a> &nbsp; &nbsp;
+    <a class="btn btn-primary" href="{% url 'view-memberbusiness' form.id  %}">Business Details</a>
 
 
 {% endblock %}

@@ -2,39 +2,77 @@
 
 {% block content %}
 
-    <div class="card">
+
+        <div class="text-white" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+            <div>
+            <p> <i class="fa fa-user-circle-o" aria-hidden="true"></i> <h3>Member Address Details</h3> </p>
+            <hr />
+                <dl class="row">
+            
+                    <dt class="col-sm-2">
+                        ID :
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.id}}
+                    </dd>
+                    <dt class="col-sm-2">
+                        Address :
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.Address}} 
+                    </dd>
+        
+                    <dt class="col-sm-2">
+                        Country :
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.Country}}
+                    </dd>
+                    <dt class="col-sm-2">
+                        State :
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.State}}
+                    </dd>
+                    <dt class="col-sm-2">
+                        City :
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.City}}
+                    </dd>
+                    <dt class="col-sm-2">
+                        Postal Code :
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.Postalcode}}
+                    </dd>
+                    <dt class="col-sm-2">
+                        Type of Address:
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.Addresstype}}
+                    </dd>
+                    <dt class="col-sm-2">
+                       Additional Information :
+                    </dt>
+                    <dd class="col-sm-10">
+                        {{record.Additionalinfo}}
+                    </dd>
+                    
+                </dl>
+            </div>
+            </div>
 
 
-        <div class="card-body">
-
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
-
-            <h3>Member-Address Details</h3>
-            <hr> 
-
-            <p> <strong> ID: </strong> {{record.id}} </p>
-            <p> <strong> Address: </strong> {{record.Address}} </p>
-            <p> <strong> Country: </strong> {{record.Country}} </p>
-            <p> <strong> State: </strong> {{record.State}} </p>
-            <p> <strong> City: </strong> {{record.City}} </p>
-            <p> <strong> Postalcode: </strong> {{record.Postalcode}} </p>
-            <p> <strong> Addresstype: </strong> {{record.Addresstype}} </p>
-            <p> <strong> Additionalinfo: </strong> {{record.Additionalinfo}} </p>
-
-
-        </div>
-
-
-    </div>
 
     <br>
 
-    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a> |
-    <a class="btn btn-outline-primary btn-sm" href="{% url 'update-memberaddress' record.id %}">Edit Data</a>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a> &nbsp; &nbsp;
+    <a class="btn btn-primary" href="{% url 'update-memberaddress' record.id %}">Edit Data</a> &nbsp; &nbsp;
 
     {% if request.user.is_superuser %}
     &nbsp;
-    <a class="btn btn-outline-info btn-sm" href="{% url 'proposedmemberaddressdata' record.id %}">Pending Request</a>
+    <a class="btn btn-info" href="{% url 'proposedmemberaddressdata' record.id %}">Pending Request</a>
     {% endif %}
 
 

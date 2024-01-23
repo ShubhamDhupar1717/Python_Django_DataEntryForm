@@ -2,9 +2,10 @@
 
 {% block content %}
 
-    <h5> Welcome, {{user}} user! 👋 </h5>
+    <h3> Welcome, {{user}} user! 👋 </h3>
 
-    <hr> 
+    <br>
+    
 
     {% if request.user.is_superuser %}
         <a class="btn btn-outline-primary btn-sm" href="{% url 'create-member' %}">Create a new record &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
@@ -14,7 +15,7 @@
     <br>
 
     {%for message in messages%}
-        <h2 style="color:greenyellow;">{{message}}</h2>
+        <h2 style="color:green;">{{message}}</h2>
     {% endfor %}
 
     <table class="table table-hover table-bordered">

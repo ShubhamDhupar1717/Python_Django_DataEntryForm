@@ -7,9 +7,9 @@
 
     <body>
 
-        <div class=" bg-dark shadow-md p-4" style="border-radius: 20px; border:black">
+        <div class="text-black shadow-md p-4" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 100px rgba(19, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
 
-            <h3> Create Member </h3>
+            <h3> Create New Member </h3>
 
             <hr>
             <br>
@@ -22,6 +22,8 @@
                 <div class="col">
                  <!-- this below is the Member creation form -->
 
+                <h4>Member Directory Form</h4>
+                <br>
                 {{mform.Fullname|as_crispy_field}}
 
                 <br>
@@ -67,7 +69,8 @@
                 <div class="col">
                 <!-- this below is the Member-Family creation form -->
 
-
+                <h4 class="text-black">Member's Family Form</h4>
+                <br>
                 {{mfform.firstname|as_crispy_field}}
 
                 <br>
@@ -106,6 +109,8 @@
                 <div class="col">
                  <!-- this below is the Member-Address creation form -->
 
+                 <h4 class="text-black">Member's Address Form</h4>
+                 <br>
                  {{maform.Address|as_crispy_field}}
 
                 <br>
@@ -140,6 +145,8 @@
                 <div class="col">
                 <!-- this below is the Member-Address creation form -->
 
+                <h4 class="text-black">Member's Business Form</h4>
+                <br>
                 {{mbform.Businessname|as_crispy_field}}
 
                 <br>
