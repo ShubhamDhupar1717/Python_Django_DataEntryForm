@@ -7,6 +7,7 @@ from .models import MemberData, MemberFamilyData, MemberAddressData, MemberBusin
 from django.contrib import messages
 from .decorator import unauthenticated_user, allowed_users, admin_only
 from django.contrib.auth.models import Group
+from django.forms.models import model_to_dict
 
 
 def Home(request):
@@ -210,29 +211,26 @@ def update_member(request, pk):
 @allowed_users(allowed_roles=['SuperUsers'])
 def proposed_memberdata(request, pk):
     proposeddata = ProposedMemberData.objects.get(proposed_memberdata_id=pk)
-    if not(proposeddata):
+    if not proposeddata :
         return redirect("dashboard")
-    memberdata = MemberData.objects.get(id=pk)
     
-    fields_to_copy = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
-
-    form_data = {field: getattr(proposeddata, field) for field in fields_to_copy}
+    memberdata = MemberData.objects.get(id=pk)
+    form = UpdateMemberData(request.POST or None, instance=memberdata)
+    
+    # Get the initial data for the proposed form
+    form_data = model_to_dict(proposeddata)
 
     form1 = ProposedMemberDataForm(request.POST or None, instance=proposeddata)
-
-    form2 = UpdateMemberData(request.POST or None, initial = form_data, instance=memberdata)
-    
-    #form3 = UpdateMemberData(request.POST or None, initial=form_data, instance=memberdata)
+    form2 = UpdateMemberData(request.POST or None, initial=form_data, instance=memberdata)
 
     # If the user clicks on Accept button, save the proposed data into the MemberData Table
     if request.method == 'POST':
         if form2.is_valid():
             form2.save()
-            proposeddata.delete()
             return redirect("dashboard")
 
 
-    context = {'form1': form1, 'form2': form2}
+    context = {'form1': form1, 'form2': form}
     return render(request, 'PPMemberClub/proposedmemberdata.html', context)
 
 

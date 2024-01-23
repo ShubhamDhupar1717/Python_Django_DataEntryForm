@@ -1,13 +1,16 @@
 {% extends 'PPMemberClub/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form method="POST" enctype="multipart/form-data" autocomplete="off">
+
+<div class="row">
+  <div class="col">
+  <form method="POST" enctype="multipart/form-data" autocomplete="off">
   {% csrf_token %}
   
   <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
     
-    <h2 style="color:black;">Change Request for Member</h2>
-      <hr>
+    <!-- <h2 style="color:black;">Change Request for Member</h2>
+      <hr> -->
     <div class="col">
         <h3>Proposed Member Data</h3>
         <hr>
@@ -86,10 +89,116 @@
     </div>
     
 
-    <div class="col">
+    <!-- <div class="col">
         <h3>Current Member Data</h3>
         <hr>
-        <!-- <p> <strong> ID: </strong> {{form2.id}} </p> -->
+      
+        <div class="row">
+          <div class="col-md-8">
+              {{form2.Fullname | as_crispy_field}}
+          </div>
+          <div class="col">
+          </div>
+        </div>
+          <br>
+  
+          <div class="row">
+            <div class="col-md-8">
+              {{form2.Email | as_crispy_field}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <br>
+  
+          <div class="row">
+            <div class="col-md-8">
+              {{form2.Dob | as_crispy_field}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <br>
+  
+          <div class="row">
+            <div class="col-md-8">
+              {{form2.Resaddress | as_crispy_field}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <br>
+  
+          <div class="row">
+            <div class="col-md-8">
+              {{form2.Resphone | as_crispy_field}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <br>
+  
+          <div class="row">
+            <div class="col-md-8">
+              {{form2.Altermobileno | as_crispy_field}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <br>
+  
+          <div class="row">
+            <div class="col-md-8">
+              {{form2.Officeno | as_crispy_field}}
+            </div>
+            <div class="col">
+            </div>
+          </div>
+          <br>
+  
+          <div class="row">
+            <div class="col-md-8">
+              {{form2.Country | as_crispy_field}}
+            </div>
+            <div class="col">
+            </div>
+          </div> -->
+
+        <!-- <p> <strong> Profilepic: </strong> <img src="{{form2.Profilepic.url}}" style="height: 50px;"> </p>
+        <p> <strong> Signature: </strong> <img src="{{form2.Signature.url}}" style="height: 50px;"> </p> -->
+        <!-- <p> <strong> Creation_date: </strong> {{form2.Creation_date}} </p> -->
+
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button> &nbsp; &nbsp;
+    <a href="{% url '' %}" class="btn btn-danger"> Reject Request <i class="bi bi-building-fill-dash"></i> </a>
+    <br>
+    <br>
+    
+  </form>
+  </div>
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+<div class="col">
+    <form enctype="multipart/form-data">
+    
+    <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+      
+      <!-- <h2 style="color:black;">Change Request for Member</h2>
+        <hr> -->
+      <div class="col">
+          <h3>Current Member Data</h3>
+          <hr>
+          
         <div class="row">
           <div class="col-md-8">
               {{form2.Fullname | as_crispy_field}}
@@ -160,23 +269,23 @@
             <div class="col">
             </div>
           </div>
+  
+      </div>
 
-        <!-- <p> <strong> Profilepic: </strong> <img src="{{form2.Profilepic.url}}" style="height: 50px;"> </p>
-        <p> <strong> Signature: </strong> <img src="{{form2.Signature.url}}" style="height: 50px;"> </p> -->
-        <!-- <p> <strong> Creation_date: </strong> {{form2.Creation_date}} </p> -->
-    </div>
+      <!-- <p> <strong> Profilepic: </strong> <img src="{{form2.Profilepic.url}}" style="height: 50px;"> </p>
+      <p> <strong> Signature: </strong> <img src="{{form2.Signature.url}}" style="height: 50px;"> </p> -->
+      <!-- <p> <strong> Creation_date: </strong> {{form2.Creation_date}} </p> -->
+  
+  </div>
+</form>
+  </div>
 
-    </div>
+</div>
 
-    <br>
 
-    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button> &nbsp; &nbsp;
-
-    <a href="{% url '' %}" class="btn btn-danger"> Reject Request <i class="bi bi-building-fill-dash"></i> </a> &nbsp; &nbsp;
 
     <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
 
     <br>
     <br>
-  </form>
 {% endblock %}
