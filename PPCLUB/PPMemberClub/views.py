@@ -227,11 +227,28 @@ def proposed_memberdata(request, pk):
     if request.method == 'POST':
         if form2.is_valid():
             form2.save()
+            proposeddata.delete()
             return redirect("dashboard")
 
 
     context = {'form1': form1, 'form2': form}
     return render(request, 'PPMemberClub/proposedmemberdata.html', context)
+
+
+
+# - Delete a Proposed Table record
+
+@login_required(login_url='my-login')
+@allowed_users(allowed_roles=['SuperUsers'])
+def delete_proposedmember(request, pk):
+
+    proposeddata = ProposedMemberData.objects.get(id=pk)
+
+    proposeddata.delete()
+
+    messages.success(request, "Proposed data request was deleted!")
+
+    return redirect("dashboard")
 
 
 

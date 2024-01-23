@@ -34,4 +34,7 @@ urlpatterns = [
     path('proposedmemberfamilydata/<int:pk>', views.proposed_memberfamilydata, name="proposedmemberfamilydata"),
     path('proposedmemberaddressdata/<int:pk>', views.proposed_memberaddressdata, name="proposedmemberaddressdata"),
     path('proposedmemberbusinessdata/<int:pk>', views.proposed_memberbusinessdata, name="proposedmemberbusinessdata"),
+
+    #Proposeddata Delete
+    path("deleteproposeddata/<int:pk>",views.delete_proposedmember, name="deleteproposeddata"),
 ]
