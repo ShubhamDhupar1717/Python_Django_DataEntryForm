@@ -1,47 +1,209 @@
 {% extends 'PPMemberClub/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-  <h2>Change Request for Member</h2>
-  <form method="POST" enctype="multipart/form-data" autocomplete="off">
-    {% csrf_token %}
-    <div class="card-body">
 
-        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+        <div class="row">
+          <div class="col">
+          <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          
+          <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+            
+            <!-- <h2 style="color:black;">Change Request for Member</h2>
+              <hr> -->
+            <div class="col">
+              <h1>Proposed Member-Family Data</h1>
+                <hr>
+                
+              <div class="row">
+                <div class="col-md-8">
+                    {{form1.firstname | as_crispy_field}}
+                </div>
+                <div class="col">
+                </div>
+              </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.lastname | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.relation | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.contactno | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.homeaddress | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Spousename | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Spousedob | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Childname | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+        
+            </div>
+        
+          </div>
+        
+            <br>
+        
+            <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button> &nbsp; &nbsp;
+            <a href="{% url 'deleteproposeddata' form1.instance.id %}" class="btn btn-danger"> Reject Request <i class="bi bi-building-fill-dash"></i> </a>
+            <br>
+            <br>
+            
+          </form>
+          </div>
+        
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
 
-        <hr> 
-        <h1>Proposed Member-Family Data</h1>
-        <p> <strong> ID: </strong> {{form1.id}} </p>
-        <p> <strong> Full Name: </strong> {{form1.firstname}} </p>
-        <p> <strong> Email: </strong> {{form1.lastname}} </p>
-        <p> <strong> Dob: </strong> {{form1.relation}} </p>
-        <p> <strong> Resphone: </strong> {{form1.contactno}} </p>
-        <p> <strong> Altermobileno: </strong> {{form1.homeaddress}} </p>
-        <p> <strong> Resaddress: </strong> {{form1.Spousename}} </p>
-        <p> <strong> Officeno: </strong> {{form1.Spousedob}} </p>
-        <p> <strong> Creation_date: </strong> {{form1.Childname}} </p>
+        <div class="col">
+          <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          
+          <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+            
+            <!-- <h2 style="color:black;">Change Request for Member</h2>
+              <hr> -->
+            <div class="col">
+              <h1>Current Member-Family Data</h1>
+                <hr>
+                
+              <div class="row">
+                <div class="col-md-8">
+                    {{form2.firstname | as_crispy_field}}
+                </div>
+                <div class="col">
+                </div>
+              </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.lastname | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.relation | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.contactno | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.homeaddress | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Spousename | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Spousedob | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Childname | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+        
+            </div>
+        
+          </div>
+            
+          </form>
+          </div>
 
 
     </div>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
     <br>
     <br>
-    <div class="card-body">
-
-        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
-
-        <hr> 
-        <h1>Current Member-Family Data</h1>
-        <p> <strong> ID: </strong> {{form2.id}} </p>
-        <p> <strong> Full Name: </strong> {{form2.firstname}} </p>
-        <p> <strong> Email: </strong> {{form2.lastname}} </p>
-        <p> <strong> Dob: </strong> {{form2.relation}} </p>
-        <p> <strong> Resphone: </strong> {{form2.contactno}} </p>
-        <p> <strong> Altermobileno: </strong> {{form2.homeaddress}} </p>
-        <p> <strong> Resaddress: </strong> {{form2.Spousename}} </p>
-        <p> <strong> Officeno: </strong> {{form2.Spousedob}} </p>
-        <p> <strong> Creation_date: </strong> {{form2.Childname}} </p>
-
-
-    </div>
-    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
-  </form>
+    
+    
 {% endblock %}

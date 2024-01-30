@@ -1,45 +1,199 @@
 {% extends 'PPMemberClub/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-  <h2>Change Request for Member</h2>
-  <form method="POST" enctype="multipart/form-data" autocomplete="off">
-    {% csrf_token %}
-    <div class="card-body">
 
-        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+      <div class="row">
 
-        <hr> 
-        <h1>Proposed Member Data</h1>
-        <p> <strong> ID: </strong> {{form1.id}} </p>
-        <p> <strong> Full Name: </strong> {{form1.Address}} </p>
-        <p> <strong> Email: </strong> {{form1.Country}} </p>
-        <p> <strong> Dob: </strong> {{form1.State}} </p>
-        <p> <strong> Resphone: </strong> {{form1.City}} </p>
-        <p> <strong> Altermobileno: </strong> {{form1.Postalcode}} </p>
-        <p> <strong> Resaddress: </strong> {{form1.Addresstype}} </p>
-        <p> <strong> Officeno: </strong> {{form1.Additionalinfo}} </p>
+          <div class="col">
+          <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          
+          <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+            
+            <!-- <h2 style="color:black;">Change Request for Member</h2>
+              <hr> -->
+            <div class="col">
+
+              <h3>Proposed Member-address Data</h3>
+                <hr>
+                
+              <div class="row">
+                <div class="col-md-8">
+                    {{form1.Address | as_crispy_field}}
+                </div>
+                <div class="col">
+                </div>
+              </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Country | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.State | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.City | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Postalcode | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Addresstype | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
 
 
-    </div>
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Additionalinfo | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+
+        
+        
+            </div>
+        
+          </div>
+        
+            <br>
+        
+            <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button> &nbsp; &nbsp;
+            <a href="{% url 'deleteproposeddata' form1.instance.id %}" class="btn btn-danger"> Reject Request <i class="bi bi-building-fill-dash"></i> </a>
+            <br>
+            <br>
+            
+          </form>
+          </div>
+        
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+        <div class="col">
+          <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          
+          <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+            
+            <!-- <h2 style="color:black;">Change Request for Member</h2>
+              <hr> -->
+            <div class="col">
+              <h3>Current Member-Address Data</h3>
+                <hr>
+                
+              <div class="row">
+                <div class="col-md-8">
+                    {{form2.Address | as_crispy_field}}
+                </div>
+                <div class="col">
+                </div>
+              </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Country | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.State | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.City | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Postalcode | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Addresstype | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Additionalinfo | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+
+        
+            </div>
+        
+          </div>
+            
+          </form>
+        </div>
+
+
+      </div>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
     <br>
     <br>
-    <div class="card-body">
-
-        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
-
-        <hr> 
-        <h1>Current Member Data</h1>
-        <p> <strong> ID: </strong> {{form2.id}} </p>
-        <p> <strong> Full Name: </strong> {{form2.Address}} </p>
-        <p> <strong> Email: </strong> {{form2.Country}} </p>
-        <p> <strong> Dob: </strong> {{form2.State}} </p>
-        <p> <strong> Resphone: </strong> {{form2.City}} </p>
-        <p> <strong> Altermobileno: </strong> {{form2.Postalcode}} </p>
-        <p> <strong> Resaddress: </strong> {{form2.Addresstype}} </p>
-        <p> <strong> Officeno: </strong> {{form2.Additionalinfo}} </p>
-
-
-    </div>
-    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
-  </form>
+    
+    
 {% endblock %}

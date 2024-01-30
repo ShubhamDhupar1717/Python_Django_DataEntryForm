@@ -1,42 +1,180 @@
 {% extends 'PPMemberClub/base.html' %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-  <h2>Change Request for Member</h2>
-  <form method="POST" enctype="multipart/form-data" autocomplete="off">
-    {% csrf_token %}
-    <div class="card-body">
 
-        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+      <div class="row">
 
-        <hr> 
-        <h1>Proposed Member Data</h1>
-        <p> <strong> ID: </strong> {{form1.id}} </p>
-        <p> <strong> Full Name: </strong> {{form1.Businessname}} </p>
-        <p> <strong> Email: </strong> {{form1.Businessdetails}} </p>
-        <p> <strong> Dob: </strong> {{form1.Businessaddress}} </p>
-        <p> <strong> Resphone: </strong> {{form1.Businesscity}} </p>
-        <p> <strong> Altermobileno: </strong> {{form1.Businessemail}} </p>
-        <p> <strong> Resaddress: </strong> {{form1.Businesspostalcode}} </p>
+          <div class="col">
+          <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          
+          <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+            
+            <!-- <h2 style="color:black;">Change Request for Member</h2>
+              <hr> -->
+            <div class="col">
 
-    </div>
+              <h3>Proposed Member-Business Data</h3>
+                <hr>
+                
+              <div class="row">
+                <div class="col-md-8">
+                    {{form1.Businessname | as_crispy_field}}
+                </div>
+                <div class="col">
+                </div>
+              </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Businessdetails | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Businessaddress | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Businesscity | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Businessemail | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form1.Businesspostalcode | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+
+        
+        
+            </div>
+        
+          </div>
+        
+            <br>
+        
+            <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button> &nbsp; &nbsp;
+            <a href="{% url 'deleteproposeddata' form1.instance.id %}" class="btn btn-danger"> Reject Request <i class="bi bi-building-fill-dash"></i> </a>
+            <br>
+            <br>
+            
+          </form>
+          </div>
+        
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+        &nbsp;
+
+        <div class="col">
+          <form method="POST" autocomplete="off">
+          {% csrf_token %}
+          
+          <div class="text-white row" style="border-radius:20px; border: hidden rgb(255,255,255); box-shadow: 0 0 50px rgba(9, 0, 0, 0.5); backdrop-filter:blur(300px); width:contain; padding:25px 25px;">
+            
+            <!-- <h2 style="color:black;">Change Request for Member</h2>
+              <hr> -->
+            <div class="col">
+              <h3>Current Member-Business Data</h3>
+                <hr>
+                
+              <div class="row">
+                <div class="col-md-8">
+                    {{form2.Businessname | as_crispy_field}}
+                </div>
+                <div class="col">
+                </div>
+              </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Businessdetails | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Businessaddress | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Businesscity | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Businessemail | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+        
+                <div class="row">
+                  <div class="col-md-8">
+                    {{form2.Businesspostalcode | as_crispy_field}}
+                  </div>
+                  <div class="col">
+                  </div>
+                </div>
+                <br>
+
+        
+            </div>
+        
+          </div>
+            
+          </form>
+        </div>
+
+
+      </div>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
     <br>
     <br>
-    <div class="card-body">
-
-        <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
-
-        <hr> 
-        <h1>Current Member Data</h1>
-        <p> <strong> ID: </strong> {{form2.id}} </p>
-        <p> <strong> Full Name: </strong> {{form2.Businessname}} </p>
-        <p> <strong> Email: </strong> {{form2.Businessdetails}} </p>
-        <p> <strong> Dob: </strong> {{form2.Businessaddress}} </p>
-        <p> <strong> Resphone: </strong> {{form2.Businesscity}} </p>
-        <p> <strong> Altermobileno: </strong> {{form2.Businessemail}} </p>
-        <p> <strong> Resaddress: </strong> {{form2.Businesspostalcode}} </p>
-
-
-    </div>
-    <button type="submit" class="btn btn-success"> Accept Changes &nbsp; <i class="fa fa-check" aria-hidden="true"></i></button>
-  </form>
+    
+    
 {% endblock %}

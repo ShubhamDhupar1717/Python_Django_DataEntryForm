@@ -44,6 +44,22 @@
   
             </li>
 
+            &nbsp;     &nbsp;     &nbsp; 
+
+
+            <li class="nav-item">
+              <div class="btn-group dropstart">
+                  <button class="btn-secondary" data-bs-toggle="dropdown">
+                      <i class="bi bi-person-circle" style="height: 30px; width: 30px;"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="{% url 'user-logout' %}">Logout</a></li>
+                  </ul>
+              </div>
+          </li>
+
   
         </ul>
   
@@ -67,6 +83,8 @@
   
   
         {% endif %}
+
+       
       
         
       </div>

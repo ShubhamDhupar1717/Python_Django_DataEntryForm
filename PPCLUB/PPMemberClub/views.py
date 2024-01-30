@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .forms import CreateUserForm, LoginForm, CreateMemberData, UpdateMemberData, CreateMemberFamilyData, UpdateMemberFamilyData, CreateMemberAddressData, UpdateMemberAddressData, CreateMemberBusinessData, UpdateMemberBusinessData, ProposedMemberDataForm, ProposedMemberFamilyDataForm, ProposedMemberAddressDataForm, ProposedMemberBusinessDataForm
 from django.contrib.auth.models import auth
@@ -161,36 +162,30 @@ def create_member(request):
 # - Update existing member data
 
 @login_required(login_url='my-login')
+
 def update_member(request, pk):
-    # Retrieve the existing member data
     record = MemberData.objects.get(id=pk)
 
-    # Specify the fields you want to copy
-    fields_to_copy = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
+    # fields_to_copy = ['Fullname', 'Email', 'Dob', 'Resphone', 'Altermobileno', 'Resaddress', 'Officeno', 'Country', 'Profilepic', 'Signature']
 
-    # Create a dictionary of field values from the original form
-    form_data = {field: getattr(record, field) for field in fields_to_copy}
+    # form_data = {field: getattr(record, field) for field in fields_to_copy}
 
-    # Initialize the original form for SuperUsers
+    form_data = model_to_dict(record)
+
     form = UpdateMemberData(request.POST or None, instance=record)
 
-    # Initialize the proposed data form for FrontDesk users with the copied data
     form1 = ProposedMemberDataForm(request.POST or None, initial=form_data, instance=ProposedMemberData())
 
     if request.method == "POST":
-        # Check if the user is a SuperUser
         if request.user.is_superuser:
             form = UpdateMemberData(request.POST, instance=record)
             if form.is_valid():
-                # Save the data in the original MemberData table
                 form.save()
                 return redirect("dashboard")
             else:
                 print(form.errors)
 
-        # Check if the user is a FrontDesk user
         elif request.user.username == 'FrontDesk':
-            # Save the data in the ProposedMemberData table
             if form1.is_valid():
                 form1.instance.proposed_memberdata_id = record.id
                 form1.save()
@@ -198,8 +193,10 @@ def update_member(request, pk):
             else:
                 print(form1.errors)
 
-    # Render the appropriate form based on the user role
-    context = {'form': form} if request.user.is_superuser else {'form': form1}
+    if request.user.is_superuser :
+        context = {'form': form} 
+    else :
+        context = {'form': form1}
     return render(request, 'PPMemberClub/update-member.html', context=context)
 
 
@@ -209,29 +206,29 @@ def update_member(request, pk):
 
 @login_required(login_url='my-login')
 @allowed_users(allowed_roles=['SuperUsers'])
+
 def proposed_memberdata(request, pk):
     proposeddata = ProposedMemberData.objects.get(proposed_memberdata_id=pk)
+
     if not proposeddata :
-        return redirect("dashboard")
+        return HttpResponse("No Pending Request Found.")
     
     memberdata = MemberData.objects.get(id=pk)
-    form = UpdateMemberData(request.POST or None, instance=memberdata)
+    form2 = UpdateMemberData(request.GET or None, instance=memberdata)
     
-    # Get the initial data for the proposed form
     form_data = model_to_dict(proposeddata)
 
-    form1 = ProposedMemberDataForm(request.POST or None, instance=proposeddata)
-    form2 = UpdateMemberData(request.POST or None, initial=form_data, instance=memberdata)
+    form1 = ProposedMemberDataForm(request.GET or None, instance=proposeddata)
 
-    # If the user clicks on Accept button, save the proposed data into the MemberData Table
     if request.method == 'POST':
+        form2 = UpdateMemberData(request.POST, initial=form_data, instance=memberdata)
         if form2.is_valid():
             form2.save()
             proposeddata.delete()
             return redirect("dashboard")
 
 
-    context = {'form1': form1, 'form2': form}
+    context = {'form1': form1, 'form2': form2}
     return render(request, 'PPMemberClub/proposedmemberdata.html', context)
 
 
@@ -323,32 +320,23 @@ def update_memberfamily(request, pk):
 
     record = MemberFamilyData.objects.get(id=pk)
 
-    # Specify the fields you want to copy
-    fields_to_copy = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
+    form_data = model_to_dict(record)
 
-    # Create a dictionary of field values from the original form
-    form_data = {field: getattr(record, field) for field in fields_to_copy}
-
-    # Initialize the original form for SuperUsers
     form = UpdateMemberFamilyData(request.POST or None, instance=record)
 
-    # Initialize the proposed data form for FrontDesk users with the copied data
     form1 = ProposedMemberFamilyDataForm(request.POST or None, initial=form_data, instance=ProposedMemberData())
 
     if request.method == "POST":
-        # Check if the user is a SuperUser
         if request.user.is_superuser:
-            form = UpdateMemberFamilyData(request.POST, instance=record)
+            form = UpdateMemberFamilyData(request.POST or None, instance=record)
             if form.is_valid():
-                # Save the data in the original MemberData table
                 form.save()
                 return redirect("dashboard")
             else:
                 print(form.errors)
 
-        # Check if the user is a FrontDesk user
+
         elif request.user.username == 'FrontDesk':
-            # Save the data in the ProposedMemberData table
             if form1.is_valid():
                 form1.instance.proposed_memberfamilydata_id = record.id
                 form1.save()
@@ -356,8 +344,10 @@ def update_memberfamily(request, pk):
             else:
                 print(form1.errors)
 
-    # Render the appropriate form based on the user role
-    context = {'form': form} if request.user.is_superuser else {'form': form1}
+    if request.user.is_superuser :
+        context = {'form': form} 
+    else :
+        context = {'form': form1}
 
     return render(request, 'PPMemberClub/update-memberfamily.html', context=context)
 
@@ -374,18 +364,17 @@ def proposed_memberfamilydata(request, pk):
     proposeddata = ProposedMemberData.objects.get(proposed_memberfamilydata_id=pk)
     if not(proposeddata):
         return redirect("dashboard")
+    
     memberfamilydata = MemberFamilyData.objects.get(id=pk)
-
-    fields_to_copy = ['firstname', 'lastname', 'relation', 'contactno', 'homeaddress', 'Spousename', 'Spousedob', 'Childname']
-
-    form_data = {field: getattr(proposeddata, field) for field in fields_to_copy}
-
+    
     form1 = ProposedMemberFamilyDataForm(request.POST or None, instance=proposeddata)
-    #form2 = UpdateMemberData(request.POST or None, instance=memberdata)
-    form2 = UpdateMemberFamilyData(request.POST or None, initial=form_data, instance=memberfamilydata)
 
-    # If the user clicks on Accept button, save the proposed data into the MemberData Table
+    form_data = model_to_dict(proposeddata)
+
+    form2 = UpdateMemberFamilyData(request.POST or None, instance=memberfamilydata)
+
     if request.method == 'POST':
+        form2 = UpdateMemberFamilyData(request.POST or None, initial=form_data, instance=memberfamilydata)
         if form2.is_valid():
             form2.save()
             proposeddata.delete()
@@ -450,32 +439,22 @@ def update_memberaddress(request, pk):
 
     record = MemberAddressData.objects.get(id=pk)
 
-   # Specify the fields you want to copy
-    fields_to_copy = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
-
-    # Create a dictionary of field values from the original form
-    form_data = {field: getattr(record, field) for field in fields_to_copy}
-
-    # Initialize the original form for SuperUsers
     form = UpdateMemberAddressData(request.POST or None, instance=record)
 
-    # Initialize the proposed data form for FrontDesk users with the copied data
+    form_data = model_to_dict(record)
+
     form1 = ProposedMemberAddressDataForm(request.POST or None, initial=form_data, instance=ProposedMemberData())
 
     if request.method == "POST":
-        # Check if the user is a SuperUser
         if request.user.is_superuser:
             form = UpdateMemberAddressData(request.POST, instance=record)
             if form.is_valid():
-                # Save the data in the original MemberData table
                 form.save()
                 return redirect("dashboard")
             else:
                 print(form.errors)
 
-        # Check if the user is a FrontDesk user
         elif request.user.username == 'FrontDesk':
-            # Save the data in the ProposedMemberData table
             if form1.is_valid():
                 form1.instance.proposed_memberaddressdata_id = record.id
                 form1.save()
@@ -483,8 +462,10 @@ def update_memberaddress(request, pk):
             else:
                 print(form1.errors)
 
-    # Render the appropriate form based on the user role
-    context = {'form': form} if request.user.is_superuser else {'form': form1}
+    if request.user.is_superuser :
+        context = {'form': form} 
+    else :
+        context = {'form': form1}
 
     return render(request, 'PPMemberClub/update-memberaddress.html', context=context)
 
@@ -495,22 +476,20 @@ def update_memberaddress(request, pk):
 
 @login_required(login_url='my-login')
 @allowed_users(allowed_roles=['SuperUsers'])
+
 def proposed_memberaddressdata(request, pk):
     proposeddata = ProposedMemberData.objects.get(proposed_memberaddressdata_id=pk)
-    if not(proposeddata):
-        return redirect("dashboard")
+    
     memberaddressdata = MemberAddressData.objects.get(id=pk)
 
-    fields_to_copy = ['Address', 'Country', 'State', 'City', 'Postalcode', 'Addresstype', 'Additionalinfo']
-
-    form_data = {field: getattr(proposeddata, field) for field in fields_to_copy}
-
     form1 = ProposedMemberAddressDataForm(request.POST or None, instance=proposeddata)
-    #form2 = UpdateMemberData(request.POST or None, instance=memberdata)
-    form2 = UpdateMemberAddressData(request.POST or None, initial=form_data, instance=memberaddressdata)
 
-    # If the user clicks on Accept button, save the proposed data into the MemberData Table
+    form_data = model_to_dict(proposeddata)
+
+    form2 = UpdateMemberAddressData(request.POST or None, instance=memberaddressdata)
+
     if request.method == 'POST':
+        form2 = UpdateMemberAddressData(request.POST or None, initial=form_data, instance=memberaddressdata)
         if form2.is_valid():
             form2.save()
             proposeddata.delete()
@@ -575,32 +554,24 @@ def update_memberbusiness(request, pk):
 
     record = MemberBusinessData.objects.get(id=pk)
 
-    # Specify the fields you want to copy
     fields_to_copy = ['Businessname', 'Businessdetails', 'Businessaddress', 'Businesscity', 'Businessemail', 'Businesspostalcode']
 
-    # Create a dictionary of field values from the original form
     form_data = {field: getattr(record, field) for field in fields_to_copy}
 
-    # Initialize the original form for SuperUsers
     form = UpdateMemberBusinessData(request.POST or None, instance=record)
 
-    # Initialize the proposed data form for FrontDesk users with the copied data
     form1 = ProposedMemberBusinessDataForm(request.POST or None, initial=form_data, instance=ProposedMemberData())
 
     if request.method == "POST":
-        # Check if the user is a SuperUser
         if request.user.is_superuser:
             form = UpdateMemberBusinessData(request.POST, instance=record)
             if form.is_valid():
-                # Save the data in the original MemberData table
                 form.save()
                 return redirect("dashboard")
             else:
                 print(form.errors)
 
-        # Check if the user is a FrontDesk user
         elif request.user.username == 'FrontDesk':
-            # Save the data in the ProposedMemberData table
             if form1.is_valid():
                 form1.instance.proposed_memberbusinessdata_id = record.id
                 form1.save()
@@ -608,8 +579,10 @@ def update_memberbusiness(request, pk):
             else:
                 print(form1.errors)
 
-    # Render the appropriate form based on the user role
-    context = {'form': form} if request.user.is_superuser else {'form': form1}
+    if request.user.is_superuser :
+        context = {'form': form} 
+    else :
+        context = {'form': form1}
 
     return render(request, 'PPMemberClub/update-memberbusiness.html', context=context)
 
@@ -621,6 +594,7 @@ def update_memberbusiness(request, pk):
 
 @login_required(login_url='my-login')
 @allowed_users(allowed_roles=['SuperUsers'])
+
 def proposed_memberbusinessdata(request, pk):
     proposeddata = ProposedMemberData.objects.get(proposed_memberbusinessdata_id=pk)
     if not(proposeddata):
@@ -632,11 +606,10 @@ def proposed_memberbusinessdata(request, pk):
     form_data = {field: getattr(proposeddata, field) for field in fields_to_copy}
 
     form1 = ProposedMemberBusinessDataForm(request.POST or None, instance=proposeddata)
-    #form2 = UpdateMemberData(request.POST or None, instance=memberdata)
-    form2 = UpdateMemberBusinessData(request.POST or None, initial=form_data, instance=memberbusinessdata)
 
-    # If the user clicks on Accept button, save the proposed data into the MemberData Table
+    form2 = UpdateMemberBusinessData(request.POST or None, instance=memberbusinessdata)
     if request.method == 'POST':
+        form2 = UpdateMemberBusinessData(request.POST or None, initial=form_data, instance=memberbusinessdata)
         if form2.is_valid():
             form2.save()
             proposeddata.delete()
